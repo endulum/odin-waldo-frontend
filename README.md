@@ -1,9 +1,8 @@
-## React Template
-Personal template for starting React projects.
+## Where's Waldo?
+Imitation of the classic *Where's Waldo?* game.
 
-### Features
-- Vite as the bundler
-- Testing setup with vitest and React Testing Library
-- ESLint
-- Custom hooks provided:
-  - `useAxios`: making API calls with the axios package
+[Section](https://www.theodinproject.com/lessons/nodejs-where-s-waldo-a-photo-tagging-app)
+
+### Todo
+- [ ] Basic page layout with scrollable box containing image and sticky headers/footers
+- [ ] Correctly get the coordinates of a click on an image no matter its size
