@@ -28,8 +28,29 @@ header, footer {
   border: 10px solid white;
   overflow: auto;
   flex-grow: 1;
+  position: relative;
 }
 
 .waldo-map-img {
   min-width: 100%;
+  cursor: crosshair;
+}
+
+.crosshair {
+  width: 50px;
+  height: 50px;
+  border: 3px solid crimson;
+  background-color: rgba(255, 0, 0, .3);
+  box-shadow: 
+    0 0 5px rgba(0,0,0,1),
+    inset 0 0 5px rgba(0,0,0,1);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: 
+    left 0.5s ease,
+    top 0.5s ease,
+    opacity 0.5s ease;
+  pointer-events: none;
 }
