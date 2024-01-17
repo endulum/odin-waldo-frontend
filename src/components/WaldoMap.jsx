@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import ImgUrl from '../assets/waldo1.jpg';
 // dimensions: 2444 * 1525
 
-export default function WaldoMap() {
+export default function WaldoMap({ onCoordSet }) {
   const crosshairRef = useRef();
   function getCoords(e) {
     const bounds = e.target.getBoundingClientRect();
@@ -15,6 +15,7 @@ export default function WaldoMap() {
     crosshairRef.current.style.opacity = 1;
     crosshairRef.current.style.top = `${clickY - 25}px`;
     crosshairRef.current.style.left = `${clickX - 25}px`;
+    onCoordSet({ x: clickX.toFixed(0), y: clickY.toFixed(0) });
   }
 
   return (

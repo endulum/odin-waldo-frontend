@@ -10,8 +10,8 @@ Imitation of the classic *Where's Waldo?* game.
 - [ ] 
 
 ### Considering
-- Store coordinates as state and show them on the footer
-- Dropdown of characters and button in the footer to "check work" when locating a character
+- ~~Store coordinates as state and show them on the footer~~
+- ~~Dropdown of characters and button in the footer to "check work" when locating a character~~
 - Blur mapbox before starting? 
   - Dialog modal on startup to confirm starting the game
   - On start, record time since start and show it on the header

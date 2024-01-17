@@ -24,6 +24,13 @@ header, footer {
   padding: 1rem;
 }
 
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .waldo-map {
   border: 10px solid white;
   overflow: auto;
@@ -39,11 +46,11 @@ header, footer {
 .crosshair {
   width: 50px;
   height: 50px;
-  border: 3px solid crimson;
-  background-color: rgba(255, 0, 0, .3);
+  border: 3px solid white;
+  outline: 1px solid black;
   box-shadow: 
     0 0 5px rgba(0,0,0,1),
-    inset 0 0 5px rgba(0,0,0,1);
+    0 0 10px rgba(0,0,0,0.5);
   position: absolute;
   left: 0;
   top: 0;
@@ -53,4 +60,10 @@ header, footer {
     top 0.5s ease,
     opacity 0.5s ease;
   pointer-events: none;
+}
+
+.bottom-left {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
