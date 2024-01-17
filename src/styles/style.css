@@ -62,7 +62,7 @@ footer {
   pointer-events: none;
 }
 
-.bottom-left {
+.bottom-right {
   display: flex;
   flex-direction: column;
   align-items: end;

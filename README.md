@@ -7,7 +7,8 @@ Imitation of the classic *Where's Waldo?* game.
 - [x] Basic page layout with scrollable box containing image and sticky headers/footers
 - [x] Correctly get the coordinates of a click on an image no matter its size
 - [x] Visible box around click coordinates, that moves with each click
-- [ ] 
+- [x] Control component with a dropdown with characters left to find, and a button to give feedback on correct or incorrect guesses
+- [ ] Connect control component to an API
 
 ### Considering
 - ~~Store coordinates as state and show them on the footer~~
