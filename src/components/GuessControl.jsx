@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 
 export default function GuessControl({
+  currentCoords,
   charactersFound,
   setCharactersFound,
 }) {
@@ -59,6 +60,20 @@ export default function GuessControl({
               Check
             </button>
           </div>
+          {currentCoords === null ? (
+            <small>
+              Map placement not made yet
+            </small>
+          ) : (
+            <small>
+              Placement currently at
+              {' '}
+              <b>{currentCoords.x}</b>
+              ,
+              {' '}
+              <b>{currentCoords.y}</b>
+            </small>
+          )}
         </>
       ) : <p>You found all the characters!</p>}
     </div>
