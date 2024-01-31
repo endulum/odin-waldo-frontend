@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import GuessControl from './components/GuessControl';
 import WaldoMap from './components/WaldoMap';
@@ -10,6 +10,8 @@ export default function App() {
   // if null, the game hasn't started
   // if [], the game has started - record time of game start
   // if length is 4, the game has ended - record time of game end
+
+  useEffect(() => console.log(charactersFound), [charactersFound]);
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function App() {
             Characters to find:
             {' '}
             {['Waldo', 'Wilma', 'Odlaw', 'The Wizard'].map((character, index) => {
-              if (!charactersFound.includes(character.toLowerCase())) {
+              if (!charactersFound.includes(character)) {
                 return (
                   <b key={character}>
                     {character}

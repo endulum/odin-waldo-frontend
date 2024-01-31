@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function useFetch(url, payload) {
+export default function useFetch(url) {
   const [data, setData] = useState(null);
-  const [waiting, setWaiting] = useState(true);
+  const [waiting, setWaiting] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchData() {
+  async function fetchData(payload) {
     setData(null);
     setWaiting(true);
     setError(null);
@@ -33,6 +33,8 @@ export default function useFetch(url, payload) {
     }
     setWaiting(false);
   }
+
+  useEffect(() => console.log(JSON.stringify(data)), [data]);
 
   return {
     data, waiting, error, fetchData,

@@ -1,26 +1,53 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import useFetch from '../custom-hooks/useFetch';
 
 export default function GuessControl({
   currentCoords,
   charactersFound,
   setCharactersFound,
 }) {
-  const [loading, setLoading] = useState(false);
-  const [correct, setCorrect] = useState(null);
+  const [responseMsg, setResponseMsg] = useState(null);
   const characterSelect = useRef(null);
+
+  const {
+    data, waiting, error, fetchData,
+  } = useFetch('http://localhost:3000/maps/1');
+
+  useEffect(() => {
+    setResponseMsg(null);
+    if (data !== null) {
+      if ('isCorrect' in data) {
+        if (data.isCorrect === true) {
+          if (charactersFound.includes(characterSelect.current?.value)) {
+            setResponseMsg('You already found this character.');
+          } else {
+            setResponseMsg('Correct!');
+            setCharactersFound([...charactersFound, characterSelect.current?.value]);
+          }
+        } else {
+          setResponseMsg('Nope, try again!');
+        }
+      } else if ('errors' in data) {
+        if (data.errors[0].path === 'character') {
+          setResponseMsg('This character doesn\'t exist in this map.');
+        } else setResponseMsg('Please select a place on the map.');
+      }
+    }
+  }, [data]);
+
   return (
     <div className="bottom-right">
       {charactersFound.length < 4 ? (
         <>
-          {loading ? (
+          {waiting ? (
             <small>
               Checking your guess...
             </small>
           ) : (
             <small>
-              {correct === true && 'Correct!'}
-              {correct === false && 'Nope, try again!'}
+              {responseMsg && responseMsg}
+              {error && error}
             </small>
           )}
           <div>
@@ -28,33 +55,28 @@ export default function GuessControl({
               I found
               {' '}
               <select id="found" ref={characterSelect}>
-                {!charactersFound.includes('waldo') && <option value="waldo">Waldo</option>}
-                {!charactersFound.includes('wilma') && <option value="wilma">Wilma</option>}
-                {!charactersFound.includes('odlaw') && <option value="odlaw">Odlaw</option>}
-                {!charactersFound.includes('wizard') && <option value="wizard">The Wizard</option>}
+                {!charactersFound.includes('Waldo') && <option value="Waldo">Waldo</option>}
+                {!charactersFound.includes('Wilma') && <option value="Wilma">Wilma</option>}
+                {!charactersFound.includes('Odlaw') && <option value="Odlaw">Odlaw</option>}
+                {!charactersFound.includes('Wizard') && <option value="wizard">The Wizard</option>}
               </select>
               {' '}
               !
             </label>
             {' '}
             <button
-              disabled={loading}
+              disabled={waiting}
               type="button"
               onClick={() => {
-                // fake win value
-                const win = true;
-                setLoading(true);
-                // timeouts "mock" latent response time
-                setTimeout(() => {
-                  if (win) {
-                    setCharactersFound([...charactersFound, characterSelect.current.value]);
-                  }
-                  setLoading(false);
-                  setCorrect(win);
-                  setTimeout(() => {
-                    setCorrect(null);
-                  }, 1000);
-                }, 1000);
+                fetchData({
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    x: currentCoords?.x,
+                    y: currentCoords?.y,
+                    character: characterSelect.current.value,
+                  }),
+                });
               }}
             >
               Check
