@@ -58,7 +58,7 @@ export default function GuessControl({
                 {!charactersFound.includes('Waldo') && <option value="Waldo">Waldo</option>}
                 {!charactersFound.includes('Wilma') && <option value="Wilma">Wilma</option>}
                 {!charactersFound.includes('Odlaw') && <option value="Odlaw">Odlaw</option>}
-                {!charactersFound.includes('Wizard') && <option value="wizard">The Wizard</option>}
+                {!charactersFound.includes('Wizard') && <option value="Wizard">The Wizard</option>}
               </select>
               {' '}
               !
